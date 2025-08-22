@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  myapp:
+    build: ./           # строим образ из текущего каталога
+    container_name: myapp_rest-service  # именуем контейнер
+    ports:
+      - "8080:8080"
