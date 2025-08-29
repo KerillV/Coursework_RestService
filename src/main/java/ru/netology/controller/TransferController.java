@@ -17,7 +17,7 @@ public class TransferController {
     }
 
     @PostMapping("/")
-    @CrossOrigin//(origins = {"http://localhost:5500/"})
+    //@CrossOrigin("https://serp-ya.github.io")
     public Object transferMoney(@RequestBody TransferRequest request) {
         return transferService.transfer(request);
     }
