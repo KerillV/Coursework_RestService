@@ -3,28 +3,29 @@ package ru.netology.controller;
 import org.springframework.web.bind.annotation.*;
 import ru.netology.model.ConfirmationRequest;
 import ru.netology.model.TransferRequest;
-import ru.netology.service.TransferService;
+import ru.netology.model.TransferResponse;
+import ru.netology.service.CardService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/transfer")
+@RequestMapping
 public class TransferController {
 
-    private final TransferService transferService;
+    private final CardService cardService;
 
-    public TransferController(TransferService transferService) {
-        this.transferService = transferService;
+    public TransferController(CardService cardService) {
+        this.cardService = cardService;
     }
 
-    @PostMapping("/")
-    //@CrossOrigin("https://serp-ya.github.io")
-    public Object transferMoney(@RequestBody TransferRequest request) {
-        return transferService.transfer(request);
+    @PostMapping("/transfer")
+    @CrossOrigin("http://serp-ya.github.io")
+    public TransferResponse prepareTransfer(@RequestBody TransferRequest request) {
+        return cardService.prepareTransfer(request);
     }
 
     @PostMapping("/confirmOperation")
-    public Object confirmOperation(@RequestBody ConfirmationRequest request) {
-        return transferService.confirmOperation(request.getOperationId(), request.getCode());
+    @CrossOrigin("http://serp-ya.github.io")
+    public TransferResponse confirmOperation(@RequestBody ConfirmationRequest request) {
+        return cardService.confirmOperation(request.getOperationId(), request.getCode());
     }
-
 }

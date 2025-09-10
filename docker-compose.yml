@@ -1,8 +1,10 @@
-version: "3"
+version: "3.7"
 
 services:
   myapp:
     build: ./           # строим образ из текущего каталога
+    volumes:
+      - "./logs:/app/logs"  # Монтируем папку logs внутри контейнера на папку logs на хосте
     container_name: myapp_rest-service  # именуем контейнер
     ports:
       - "8080:8080"
